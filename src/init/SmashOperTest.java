@@ -13,4 +13,10 @@ public class SmashOperTest {
     public void testCastinttohashset() throws Exception {
         HashSet<Integer> aa = new SmashOper().castinttohashset(1234);
     }
+
+    @Test
+    public void testfind() throws Exception{
+        SmashOper aa =new SmashOper();
+        aa.findnumber(1234,aa.castinttohashset(1234));
+    }
 }
