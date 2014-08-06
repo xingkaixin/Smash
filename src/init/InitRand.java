@@ -7,32 +7,20 @@ import java.util.ArrayList;
  */
 public class InitRand {
 
-    public int randint;
+    public ArrayList<Integer> basics = new ArrayList<Integer>();
 
 
-    public InitRand(int max) {
-        int min = 0;
+    public InitRand() {
+        int i = 0;
+        while (i < 9) {
 
-        randint = (int) (Math.random()*(max - min) + min);
-    }
+            basics.add(i + 1);
+            i++;
 
-    public ArrayList<Integer> createBasic() {
-        ArrayList<Integer> basicint = new ArrayList<Integer>();
-        for(int i=0;i<9; i++) {
-            basicint.add(i+1);
-        }
-        return basicint;
-    }
-
-    public static void main(String[] args) {
-
-        for(int i=0;i<10;i++) {
-            smash smash1 = new smash();
-            System.out.println(smash1.getmash());
         }
 
-
-
-
     }
+
+
 }
+

@@ -9,14 +9,17 @@ public class smash {
 
     public ArrayList<Integer> smash = new ArrayList<Integer>();
     public smash(){
-        int max=9;
+        int max = 9;
+        int min = 1;
         int intrand;
-        ArrayList<Integer> basicint = new InitRand(max).createBasic();
+        ArrayList<Integer>  basics = new InitRand().basics;
+
         for(int t = 0;t<4;t++) {
-            InitRand rand = new InitRand(max);
-            intrand = rand.randint;
-            smash.add(basicint.get(intrand));
-            basicint.remove(basicint);
+
+            intrand = (int) ((Math.random() * (max - min)) + min);
+
+            smash.add(basics.get(intrand));
+            basics.remove(intrand);
             max--;
 
         }
