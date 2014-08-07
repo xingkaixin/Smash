@@ -34,9 +34,8 @@ public class SmashOper {
 
     public int[] findnumber(int numbers, Collection<Integer> target) {
         boolean flag_exist;
-        int[] result = new int[6];
+        int[] result = new int[5];
         int exist = 0;
-        int correct = 0;
 
 
         Collection<Integer> number = castinttohashset(numbers);
@@ -64,11 +63,10 @@ public class SmashOper {
         }
 
         result[4] = exist;
-        result[5] = correct;
-        for (int i = 0; i < 6; i++) {
-            System.out.println("result" + i + ":" + result[i]);
 
-        }
+        System.out.println("("+result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+")");
+
+
         return result;
     }
 
