@@ -1,5 +1,6 @@
 package init;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -8,8 +9,8 @@ import java.util.Iterator;
  */
 public class SmashOper {
 
-    public HashSet<Integer> castinttohashset(int num) {
-        HashSet<Integer> hashnum = new HashSet<Integer>();
+    public Collection<Integer> castinttohashset(int num) {
+        Collection<Integer> hashnum = new HashSet<Integer>();
         String strnum = String.valueOf(num);
         for (int i = 0, j = 1; i < 4; i++, j++) {
             System.out.println(strnum.substring(i, j));
@@ -18,7 +19,7 @@ public class SmashOper {
         return hashnum;
     }
 
-    public int casthashtoint(HashSet<Integer> num) {
+    public int casthashtoint(Collection<Integer> num) {
        int nums = 0;
 
         Iterator<Integer> iter = num.iterator();
@@ -31,7 +32,7 @@ public class SmashOper {
         return nums;
     }
 
-    public int[] findnumber(int numbers, HashSet<Integer> target) {
+    public int[] findnumber(int numbers, Collection<Integer> target) {
         System.out.println(casthashtoint(target));
         boolean flag_exist;
         int[] result = new int[6];
@@ -39,7 +40,7 @@ public class SmashOper {
         int correct = 0;
 
 
-        HashSet<Integer> number = castinttohashset(numbers);
+        Collection<Integer> number = castinttohashset(numbers);
         Iterator<Integer> iter = number.iterator();
         int location = 0;
         while (iter.hasNext()) {

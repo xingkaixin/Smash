@@ -1,6 +1,7 @@
 package init;
 
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -8,17 +9,17 @@ import java.util.Iterator;
 /**
  * Created by XingKaiXin on 2014/8/6.
  */
-public class HashSmash {
+public class CollectionSmash {
 
 
-    public HashSet<Integer> createSmashone() {
+    public Collection<Integer> createSmashone() {
         int max = 8;
         int min = 1;
         int intrand;
 
-        HashSet<Integer> smashinit = new HashSet<Integer>();
+        Collection<Integer> smashinit = new HashSet<Integer>();
 
-        HashSet<Integer> smashone = new HashSet<Integer>();
+        Collection<Integer> smashone = new HashSet<Integer>();
 
         for (int i = 1; i < 9; i++) {
             smashinit.add(i);
@@ -47,12 +48,12 @@ public class HashSmash {
     }
 
     public static void main(String[] args) {
-        HashSet<HashSet<Integer>> smashall = new HashSet<HashSet<Integer>>();
+        Collection<Collection<Integer>> smashall = new HashSet<Collection<Integer>>();
         int i = 0;
         long start = System.currentTimeMillis();
         //8个数字91种 9个155种
         while (i < 10000000) {
-            HashSmash aa = new HashSmash();
+            CollectionSmash aa = new CollectionSmash();
             smashall.add(aa.createSmashone());
             i++;
         }
