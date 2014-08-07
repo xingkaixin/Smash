@@ -1,7 +1,6 @@
 package init;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Created by Kevin on 2014/8/7.
@@ -57,6 +56,43 @@ public class ResolvSmash {
     }
 
 
+    public Collection<Collection<Integer>> AgrCollection(Collection<Integer> int1,Collection<Integer> int2,Collection<Integer> int3,Collection<Integer> int4,
+                                                          Collection<Integer> int5,Collection<Integer> int6,Collection<Integer> int7,Collection<Integer> int8) {
+        Collection<Collection<Integer>> agr = new ArrayList<Collection<Integer>>();
+        agr.add(int1);
+        agr.add(int2);
+        agr.add(int3);
+        agr.add(int4);
+
+        agr.add(int5);
+        agr.add(int6);
+        agr.add(int7);
+        agr.add(int8);
+
+        return  agr;
+    }
+
+    public Collection<Integer> ResizeGuessLib(Collection<Integer> ints,int[] removenums) {
+        Collection<Integer> resize = new HashSet<Integer>();
+        ArrayList<Integer> redef;
+        redef = (ArrayList<Integer>) ints;
+        int size =removenums.length;
+        int removenum;
+        for(int i=0;i<size;i++){
+            removenum = removenums[i];
+            redef.remove(redef.indexOf(removenum));
+        }
+        Iterator<Integer> iter = redef.iterator();
+        while(iter.hasNext()){
+            resize.add(iter.next());
+        }
+        return resize;
+    }
+
+
+
+
+
 
     public static void main(String[] args) {
         int a;
@@ -81,11 +117,20 @@ public class ResolvSmash {
         }
 
         int nextround = rs.secondround;
+        int trytimes = 10;
         while(!correct) {
-
+            System.out.println(trytimes);
+            trytimes--;
+            if(trytimes==0){
+               break;
+            }
         }
 
-        System.out.println("CORRECT!Number is "+ nextround);
+        if(correct){
+            System.out.println("CORRECT!Number is "+ nextround);
+        }else{
+            System.out.println("GAME OVER!");
+        }
 
 
 
