@@ -1,9 +1,7 @@
 package init;
 
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 
 /**
@@ -13,15 +11,15 @@ public class CollectionSmash {
 
 
     public Collection<Integer> createSmashone() {
-        int max = 8;
+        int max = 9;
         int min = 1;
         int intrand;
 
-        Collection<Integer> smashinit = new HashSet<Integer>();
+        Collection<Integer> smashinit = new LinkedList<Integer>();
 
-        Collection<Integer> smashone = new HashSet<Integer>();
+        Collection<Integer> smashone = new LinkedList<Integer>();
 
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < 10; i++) {
             smashinit.add(i);
         }
 
@@ -47,12 +45,15 @@ public class CollectionSmash {
         return smashone;
     }
 
+
+
+
     public static void main(String[] args) {
         Collection<Collection<Integer>> smashall = new HashSet<Collection<Integer>>();
         int i = 0;
         long start = System.currentTimeMillis();
-        //8个数字91种 9个155种
-        while (i < 10000000) {
+        //8个数字840种 9个1680种
+        while (i < 1000000) {
             CollectionSmash aa = new CollectionSmash();
             smashall.add(aa.createSmashone());
             i++;

@@ -18,7 +18,6 @@ public class SmashOperTest {
     @Test
     public void testfind() throws Exception{
         SmashOper aa =new SmashOper();
-        System.out.println(aa.castinttohashset(4321));
-        aa.findnumber(1234,aa.castinttohashset(4321));
+        aa.findnumber(1234,aa.castinttohashset(5634));
     }
 }
