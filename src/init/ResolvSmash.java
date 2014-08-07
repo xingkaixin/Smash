@@ -89,6 +89,16 @@ public class ResolvSmash {
         return resize;
     }
 
+    public int GuessNext(Collection<Collection<Integer>> guessgroup,int[] lastresult) {
+        int guessnext = 0;
+        return guessnext;
+    }
+
+    public int[] GetNumsToRemove(int lastguest,int[] lastresult) {
+        int[] removenums = new int[3];
+        return removenums;
+    }
+
 
 
 
@@ -119,7 +129,7 @@ public class ResolvSmash {
         int nextround = rs.secondround;
         int trytimes = 10;
         while(!correct) {
-            System.out.println(trytimes);
+
             trytimes--;
             if(trytimes==0){
                break;
