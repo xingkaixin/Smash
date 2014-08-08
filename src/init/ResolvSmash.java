@@ -72,7 +72,7 @@ public class ResolvSmash {
         return  agr;
     }
 
-    public Collection<Integer> ResizeGuessLib(Collection<Integer> ints,int[] removenums) {
+    public Collection<Integer> ResizeGuessLib2(Collection<Integer> ints,int[] removenums) {
         Collection<Integer> resize = new HashSet<Integer>();
         ArrayList<Integer> redef;
         redef = (ArrayList<Integer>) ints;
@@ -99,7 +99,16 @@ public class ResolvSmash {
         return removenums;
     }
 
+    public Collection<Collection<Integer>> ResizeGuessLib1(Collection<Collection<Integer>> ints,int[] removenums) {
+        Collection<Collection<Integer>> resize = new ArrayList<Collection<Integer>>();
 
+        Iterator<Collection<Integer>> iter = ints.iterator();
+        while(iter.hasNext()) {
+            resize.add(ResizeGuessLib2(iter.next(),removenums));
+        }
+
+        return resize;
+    }
 
 
 
