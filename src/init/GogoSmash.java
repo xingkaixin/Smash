@@ -193,36 +193,47 @@ public class GogoSmash {
         return ints;
     }
 
-    public int GenNextGuessNumsPart1(ArrayList<Integer> int1,ArrayList<Integer> int2,ArrayList<Integer> int3,ArrayList<Integer> int4,int countnum){
-        int currentnum=0;
-        int newnum;
-        int part1=0;
+    public int GenNextGuessNumsPart1(ArrayList<Integer> int1, ArrayList<Integer> int2, ArrayList<Integer> int3, ArrayList<Integer> int4, int countnum) {
+        int currentnum = 0;
+        int newnum = 0;
+        int part1 = 0;
         ArrayList<ArrayList<Integer>> agr = new ArrayList<ArrayList<Integer>>();
         agr.add(int1);
         agr.add(int2);
         agr.add(int3);
         agr.add(int4);
         ArrayList<Integer> operinst = new ArrayList<Integer>();
-        for(int i=0;i<countnum-1;i++){
-           operinst.addAll(agr.get(i));
-            if(!operinst.isEmpty()){
-                newnum=GetNumFromInts(operinst,currentnum);
+        for (int i = 0, j = 1000; i < countnum ; i++) {
+            operinst.addAll(agr.get(i));
+            System.out.println(operinst);
+            if (!operinst.isEmpty()) {
+                newnum += GetNumFromInts(operinst, currentnum) * 1000;
                 operinst.clear();
+                j = j / 10;
+                currentnum = newnum;
             }
-
         }
-
-
-        return part1;
+        System.out.println("acttttt "+newnum);
+        return newnum;
     }
 
-    public int GetNumFromInts(ArrayList<Integer> ints,int currentnum){
+    public int GetNumFromInts(ArrayList<Integer> ints, int currentnum) {
         Iterator<Integer> iter = ints.iterator();
+        String str = String.valueOf(currentnum);
+
+        for(int i =0,j=0,size = str.length();i<4-size;i++){
+            str = j+str;
+        }
+
+        int a = Integer.valueOf(str.substring(0, 1));
+        int b = Integer.valueOf(str.substring(1, 2));
+        int c = Integer.valueOf(str.substring(2, 3));
+        int d = Integer.valueOf(str.substring(3, 4));
         int newnum = 0;
-        while(iter.hasNext()){
-           newnum = iter.next();
-            if(currentnum==newnum){
-            }else{
+        while (iter.hasNext()) {
+            newnum = iter.next();
+            if (a == newnum || b == newnum || c == newnum || d == newnum) {
+            } else {
                 break;
             }
         }
