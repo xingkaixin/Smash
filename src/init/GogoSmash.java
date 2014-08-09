@@ -207,7 +207,7 @@ public class GogoSmash {
             operinst.addAll(agr.get(i));
             System.out.println(operinst);
             if (!operinst.isEmpty()) {
-                newnum += GetNumFromInts(operinst, currentnum) * 1000;
+                newnum += GetNumFromInts(operinst, currentnum) * j;
                 operinst.clear();
                 j = j / 10;
                 currentnum = newnum;
