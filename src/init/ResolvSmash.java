@@ -96,10 +96,6 @@ public class ResolvSmash {
         return guessnext;
     }
 
-    public int[] GetNumsToRemove(int lastguest, int[] lastresult) {
-        int[] removenums = new int[3];
-        return removenums;
-    }
 
     public Collection<Collection<Integer>> ResizeGuessLib1(Collection<Collection<Integer>> ints, int[] removenums) {
         Collection<Collection<Integer>> resize = new ArrayList<Collection<Integer>>();
@@ -127,6 +123,23 @@ public class ResolvSmash {
             }
         }
         return ints;
+    }
+
+    public int[] getRemoveNums(int lastguessnum, int[] lastresult) {
+        int[] removenums = new int[4];
+        int j = 0;
+        String str = String.valueOf(lastguessnum);
+        int tmpremove;
+        for (int i = 0; i < 4; i++) {
+            if (lastresult[i] == 1) {
+                tmpremove = Integer.parseInt(str.substring(i - 1, i));
+                removenums[j] = tmpremove;
+                j++;
+            }
+
+        }
+
+        return removenums;
     }
 
     public int GenGuessNum(int n1, int n2, int n3, int n4) {
