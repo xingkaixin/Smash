@@ -109,7 +109,7 @@ public class ResolvSmash {
     }
 
 
-    public Collection<Integer> ResizeGuessFirstSetp(Collection<Integer> ints, int sernum, int lastguessnum, int[] lastresult) {
+    public Collection<Integer>ResizeGuessFirstStep(Collection<Integer> ints, int sernum, int lastguessnum, int[] lastresult) {
         int removenumis = Integer.parseInt(String.valueOf(lastguessnum).substring(sernum - 1, sernum));
         int result = lastresult[sernum - 1];
         if (ints.isEmpty()) {
@@ -142,14 +142,53 @@ public class ResolvSmash {
         return removenums;
     }
 
+    public int[] ResetGuesnum(int lastguessnum, int[] lastresult) {
+        int[] guessnum = new int[4];
+        int j = 0;
+        String str = String.valueOf(lastguessnum);
+        int tmpremove;
+        for (int i = 0; i < 4; i++) {
+            if (lastresult[i] == 1) {
+                tmpremove = Integer.parseInt(str.substring(i - 1, i));
+                guessnum[i] = tmpremove;
+            }else{
+                guessnum[i] = 0;
+            }
+
+        }
+
+        return guessnum;
+    }
+
+
     public int GenGuessNum(int n1, int n2, int n3, int n4) {
         return n1 * 1000 + n2 * 100 + n3 * 10 + n4;
     }
 
 
     public static void main(String[] args) {
-        int a;
-        int b;
+        int a = 0;
+        int b = 0;
+
+
+        int n1 = 0;
+        int n2 = 0;
+        int n3 = 0;
+        int n4 = 0;
+
+        Collection<Collection<Integer>> allints;
+
+        Collection<Integer> int1;
+        Collection<Integer> int2;
+        Collection<Integer> int3;
+        Collection<Integer> int4;
+        Collection<Integer> int5;
+        Collection<Integer> int6;
+        Collection<Integer> int7;
+        Collection<Integer> int8;
+
+
+        int[] removenums = new int[4];
 
         ResolvSmash rs = new ResolvSmash();
         SmashOper so = new SmashOper();
@@ -158,6 +197,18 @@ public class ResolvSmash {
         rs.result = so.findnumber(rs.firstround, so.castinttohashset(rs.GuessSmash));
         correct = rs.correct(rs.result);
         a = rs.result[4];
+
+        allints=rs.AgrCollection(rs.int1,rs.int2,rs.int3,rs.int4,rs.int5,rs.int6,rs.int7,rs.int8);
+        removenums =rs.ResetGuesnum(rs.firstround,rs.result);
+        n1 = removenums[0];
+        n2 = removenums[1];
+        n3 = removenums[2];
+        n4 = removenums[3];
+
+        allints = rs.ResizeGuessLib1(allints,removenums);
+
+        
+
         System.out.println(correct);
 
         if (!correct) {
