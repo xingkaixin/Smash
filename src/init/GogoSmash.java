@@ -110,6 +110,25 @@ public class GogoSmash {
         return Correctnums;
     }
 
+    public String getResultNum(int lastnums, ArrayList<Integer> lastresult) {
+        String strnum;
+        int num = 0;
+        String str = String.valueOf(lastnums);
+        for (int i = 0, j = 1000, size = lastresult.size(); i < size - 1; i++) {
+            if (lastresult.get(i) == 1) {
+                System.out.println("i  " + i);
+                num += Integer.valueOf(str.substring(i, i + 1)) * j;
+            }
+            j = j / 10;
+        }
+        strnum = String.valueOf(num);
+        for (int i = 0, j = 0, size = 4 - Integer.valueOf(String.valueOf(num).length()); i < size; i++) {
+            strnum = String.valueOf(j) + strnum;
+        }
+        System.out.println(strnum);
+        return strnum;
+    }
+
     //移除所有序列中的数字
     public ArrayList<ArrayList<Integer>> DelAgrInts(ArrayList<ArrayList<Integer>> agrints, ArrayList<Integer> correctnums) {
         ArrayList<ArrayList<Integer>> allints = new ArrayList<ArrayList<Integer>>();
@@ -138,34 +157,26 @@ public class GogoSmash {
     }
 
     //按位置移除对应数字的批量
-    public ArrayList<ArrayList<Integer>> DelAgrIntsbyloc(ArrayList<ArrayList<Integer>> agrints, int correctnums) {
+    public ArrayList<ArrayList<Integer>> DelAgrIntsbyloc(ArrayList<ArrayList<Integer>> agrints, String correctnums) {
         ArrayList<ArrayList<Integer>> allints = new ArrayList<ArrayList<Integer>>();
         Iterator<ArrayList<Integer>> iter = agrints.iterator();
-        String str = String.valueOf(correctnums);
+        String str = correctnums;
         int a = Integer.valueOf(str.substring(0, 1));
         int b = Integer.valueOf(str.substring(1, 2));
         int c = Integer.valueOf(str.substring(2, 3));
         int d = Integer.valueOf(str.substring(3, 4));
 
         int i = 1;
+
         while (iter.hasNext()) {
             if (i == 1 || i == 5) {
-                if (a > 0) {
-                    allints.add(DelIntsbyloc(iter.next(), a));
-                }
-
+                allints.add(DelIntsbyloc(iter.next(), a));
             } else if (i == 2 || i == 6) {
-                if (b > 0) {
-                    allints.add(DelIntsbyloc(iter.next(), b));
-                }
+                allints.add(DelIntsbyloc(iter.next(), b));
             } else if (i == 3 || i == 7) {
-                if (c > 0) {
-                    allints.add(DelIntsbyloc(iter.next(), c));
-                }
+                allints.add(DelIntsbyloc(iter.next(), c));
             } else if (i == 4 || i == 8) {
-                if (d > 0) {
-                    allints.add(DelIntsbyloc(iter.next(), d));
-                }
+                allints.add(DelIntsbyloc(iter.next(), d));
             }
             i++;
         }
@@ -177,10 +188,45 @@ public class GogoSmash {
     public ArrayList<Integer> DelIntsbyloc(ArrayList<Integer> ints, int correctnum) {
         int index = ints.indexOf(correctnum);
         if (index >= 0) {
-            System.out.println("index "+index);
             ints.remove(index);
         }
         return ints;
+    }
+
+    public int GenNextGuessNumsPart1(ArrayList<Integer> int1,ArrayList<Integer> int2,ArrayList<Integer> int3,ArrayList<Integer> int4,int countnum){
+        int currentnum=0;
+        int newnum;
+        int part1=0;
+        ArrayList<ArrayList<Integer>> agr = new ArrayList<ArrayList<Integer>>();
+        agr.add(int1);
+        agr.add(int2);
+        agr.add(int3);
+        agr.add(int4);
+        ArrayList<Integer> operinst = new ArrayList<Integer>();
+        for(int i=0;i<countnum-1;i++){
+           operinst.addAll(agr.get(i));
+            if(!operinst.isEmpty()){
+                newnum=GetNumFromInts(operinst,currentnum);
+                operinst.clear();
+            }
+
+        }
+
+
+        return part1;
+    }
+
+    public int GetNumFromInts(ArrayList<Integer> ints,int currentnum){
+        Iterator<Integer> iter = ints.iterator();
+        int newnum = 0;
+        while(iter.hasNext()){
+           newnum = iter.next();
+            if(currentnum==newnum){
+            }else{
+                break;
+            }
+        }
+        return newnum;
     }
 
 
