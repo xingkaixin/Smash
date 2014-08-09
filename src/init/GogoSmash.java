@@ -34,7 +34,7 @@ public class GogoSmash {
             smashinit.remove(intrand);
             max--;
         }
-        System.out.println("GOGOSMASH is "+smash);
+        System.out.println("GOGOSMASH is " + smash);
 
         for (int i = 1; i < 5; i++) {
             ints1.add(i);
@@ -53,8 +53,8 @@ public class GogoSmash {
     }
 
     //把8个数字集统计，方便后面计算
-    public ArrayList<ArrayList<Integer>> AgrAllinsts(ArrayList<Integer> ints1,ArrayList<Integer> ints2,ArrayList<Integer> ints3,ArrayList<Integer> ints4,
-                                                     ArrayList<Integer> ints5,ArrayList<Integer> ints6,ArrayList<Integer> ints7,ArrayList<Integer> ints8) {
+    public ArrayList<ArrayList<Integer>> AgrAllinsts(ArrayList<Integer> ints1, ArrayList<Integer> ints2, ArrayList<Integer> ints3, ArrayList<Integer> ints4,
+                                                     ArrayList<Integer> ints5, ArrayList<Integer> ints6, ArrayList<Integer> ints7, ArrayList<Integer> ints8) {
         ArrayList<ArrayList<Integer>> allints = new ArrayList<ArrayList<Integer>>();
         allints.add(ints1);
         allints.add(ints2);
@@ -94,46 +94,92 @@ public class GogoSmash {
     }
 
     //根据猜测的结果，返回位置也正确的数字集
-    public ArrayList<Integer> getCorrectnums(int lastnums,ArrayList<Integer> lastresult){
+    public ArrayList<Integer> getCorrectnums(int lastnums, ArrayList<Integer> lastresult) {
         ArrayList<Integer> Correctnums = new ArrayList<Integer>();
         ArrayList<Integer> correctloc = new ArrayList<Integer>();
-        for(int i=0,size=lastresult.size();i<size-1;i++){
-            if(lastresult.get(i)==1){
+        for (int i = 0, size = lastresult.size(); i < size - 1; i++) {
+            if (lastresult.get(i) == 1) {
                 correctloc.add(i);
             }
         }
-        String str= String.valueOf(lastnums);
-        for(int i =0,size=correctloc.size();i<size;i++){
-            Correctnums.add(Integer.valueOf(str.substring(correctloc.get(i), correctloc.get(i)+1)));
+        String str = String.valueOf(lastnums);
+        for (int i = 0, size = correctloc.size(); i < size; i++) {
+            Correctnums.add(Integer.valueOf(str.substring(correctloc.get(i), correctloc.get(i) + 1)));
         }
         System.out.println(Correctnums);
         return Correctnums;
     }
 
     //移除所有序列中的数字
-    public  ArrayList<ArrayList<Integer>> DelAgrInts( ArrayList<ArrayList<Integer>> agrints,ArrayList<Integer> correctnums){
+    public ArrayList<ArrayList<Integer>> DelAgrInts(ArrayList<ArrayList<Integer>> agrints, ArrayList<Integer> correctnums) {
         ArrayList<ArrayList<Integer>> allints = new ArrayList<ArrayList<Integer>>();
         Iterator<ArrayList<Integer>> iter = agrints.iterator();
-        while(iter.hasNext()){
-            allints.add(DelInts(iter.next(),correctnums));
+        while (iter.hasNext()) {
+            allints.add(DelInts(iter.next(), correctnums));
         }
         System.out.println(allints);
         return allints;
     }
 
     //移除一个序列中的数字
-    public  ArrayList<Integer> DelInts(ArrayList<Integer> ints,ArrayList<Integer> correctnums){
+    public ArrayList<Integer> DelInts(ArrayList<Integer> ints, ArrayList<Integer> correctnums) {
         System.out.println(ints);
-        if(ints.size()>0){
-            for(int i=0,size=correctnums.size();i<size;i++){
-                int index =ints.indexOf(correctnums.get(i));
-                if(index>0){
-                    ints.remove(ints.indexOf(correctnums.get(i)));
+        if (ints.size() > 0) {
+            for (int i = 0, size = correctnums.size(); i < size; i++) {
+                int index = ints.indexOf(correctnums.get(i));
+                if (index >= 0) {
+                    ints.remove(index);
                 }
 
             }
         }
-       // System.out.println(ints);
+        // System.out.println(ints);
+        return ints;
+    }
+
+    //按位置移除对应数字的批量
+    public ArrayList<ArrayList<Integer>> DelAgrIntsbyloc(ArrayList<ArrayList<Integer>> agrints, int correctnums) {
+        ArrayList<ArrayList<Integer>> allints = new ArrayList<ArrayList<Integer>>();
+        Iterator<ArrayList<Integer>> iter = agrints.iterator();
+        String str = String.valueOf(correctnums);
+        int a = Integer.valueOf(str.substring(0, 1));
+        int b = Integer.valueOf(str.substring(1, 2));
+        int c = Integer.valueOf(str.substring(2, 3));
+        int d = Integer.valueOf(str.substring(3, 4));
+
+        int i = 1;
+        while (iter.hasNext()) {
+            if (i == 1 || i == 5) {
+                if (a > 0) {
+                    allints.add(DelIntsbyloc(iter.next(), a));
+                }
+
+            } else if (i == 2 || i == 6) {
+                if (b > 0) {
+                    allints.add(DelIntsbyloc(iter.next(), b));
+                }
+            } else if (i == 3 || i == 7) {
+                if (c > 0) {
+                    allints.add(DelIntsbyloc(iter.next(), c));
+                }
+            } else if (i == 4 || i == 8) {
+                if (d > 0) {
+                    allints.add(DelIntsbyloc(iter.next(), d));
+                }
+            }
+            i++;
+        }
+        System.out.println(allints);
+        return allints;
+    }
+
+    //按位置移除对应的数字
+    public ArrayList<Integer> DelIntsbyloc(ArrayList<Integer> ints, int correctnum) {
+        int index = ints.indexOf(correctnum);
+        if (index >= 0) {
+            System.out.println("index "+index);
+            ints.remove(index);
+        }
         return ints;
     }
 
