@@ -49,15 +49,17 @@ public class ResolvSmash {
     }
 
     public boolean correct(int[] results) {
-        int result = results[0]+results[1]+results[2]+results[3];
-        if(result==4){
+        int result = results[0] + results[1] + results[2] + results[3];
+        if (result == 4) {
             return true;
-        }else {return false;}
+        } else {
+            return false;
+        }
     }
 
 
-    public Collection<Collection<Integer>> AgrCollection(Collection<Integer> int1,Collection<Integer> int2,Collection<Integer> int3,Collection<Integer> int4,
-                                                          Collection<Integer> int5,Collection<Integer> int6,Collection<Integer> int7,Collection<Integer> int8) {
+    public Collection<Collection<Integer>> AgrCollection(Collection<Integer> int1, Collection<Integer> int2, Collection<Integer> int3, Collection<Integer> int4,
+                                                         Collection<Integer> int5, Collection<Integer> int6, Collection<Integer> int7, Collection<Integer> int8) {
         Collection<Collection<Integer>> agr = new ArrayList<Collection<Integer>>();
         agr.add(int1);
         agr.add(int2);
@@ -69,48 +71,67 @@ public class ResolvSmash {
         agr.add(int7);
         agr.add(int8);
 
-        return  agr;
+        return agr;
     }
 
-    public Collection<Integer> ResizeGuessLib2(Collection<Integer> ints,int[] removenums) {
+    public Collection<Integer> ResizeGuessLib2(Collection<Integer> ints, int[] removenums) {
         Collection<Integer> resize = new HashSet<Integer>();
         ArrayList<Integer> redef;
         redef = (ArrayList<Integer>) ints;
-        int size =removenums.length;
+        int size = removenums.length;
         int removenum;
-        for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             removenum = removenums[i];
             redef.remove(redef.indexOf(removenum));
         }
         Iterator<Integer> iter = redef.iterator();
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             resize.add(iter.next());
         }
         return resize;
     }
 
-    public int GuessNext(Collection<Collection<Integer>> guessgroup,int[] lastresult) {
+    public int GuessNext(Collection<Collection<Integer>> guessgroup, int[] lastresult) {
         int guessnext = 0;
         return guessnext;
     }
 
-    public int[] GetNumsToRemove(int lastguest,int[] lastresult) {
+    public int[] GetNumsToRemove(int lastguest, int[] lastresult) {
         int[] removenums = new int[3];
         return removenums;
     }
 
-    public Collection<Collection<Integer>> ResizeGuessLib1(Collection<Collection<Integer>> ints,int[] removenums) {
+    public Collection<Collection<Integer>> ResizeGuessLib1(Collection<Collection<Integer>> ints, int[] removenums) {
         Collection<Collection<Integer>> resize = new ArrayList<Collection<Integer>>();
 
         Iterator<Collection<Integer>> iter = ints.iterator();
-        while(iter.hasNext()) {
-            resize.add(ResizeGuessLib2(iter.next(),removenums));
+        while (iter.hasNext()) {
+            resize.add(ResizeGuessLib2(iter.next(), removenums));
         }
 
         return resize;
     }
 
 
+    public Collection<Integer> ResizeGuessFirstSetp(Collection<Integer> ints, int sernum, int lastguessnum, int[] lastresult) {
+        int removenumis = Integer.parseInt(String.valueOf(lastguessnum).substring(sernum - 1, sernum));
+        int result = lastresult[sernum - 1];
+        if (ints.isEmpty()) {
+        } else {
+            if (result == 1) {
+                ints.clear();
+            } else {
+                if (ints.contains(removenumis)) {
+                    ints.remove(removenumis);
+                }
+            }
+        }
+        return ints;
+    }
+
+    public int GenGuessNum(int n1, int n2, int n3, int n4) {
+        return n1 * 1000 + n2 * 100 + n3 * 10 + n4;
+    }
 
 
     public static void main(String[] args) {
@@ -121,36 +142,35 @@ public class ResolvSmash {
         SmashOper so = new SmashOper();
         boolean correct;
 
-        rs.result = so.findnumber(rs.firstround,so.castinttohashset(rs.GuessSmash));
+        rs.result = so.findnumber(rs.firstround, so.castinttohashset(rs.GuessSmash));
         correct = rs.correct(rs.result);
         a = rs.result[4];
         System.out.println(correct);
 
         if (!correct) {
-            rs.result = so.findnumber(rs.secondround,so.castinttohashset(rs.GuessSmash));
+            rs.result = so.findnumber(rs.secondround, so.castinttohashset(rs.GuessSmash));
             correct = rs.correct(rs.result);
             b = rs.result[4];
             System.out.println(correct);
         } else {
-            System.out.println("CORRECT!Number is "+ rs.firstround);
+            System.out.println("CORRECT!Number is " + rs.firstround);
         }
 
         int nextround = rs.secondround;
         int trytimes = 10;
-        while(!correct) {
+        while (!correct) {
 
             trytimes--;
-            if(trytimes==0){
-               break;
+            if (trytimes == 0) {
+                break;
             }
         }
 
-        if(correct){
-            System.out.println("CORRECT!Number is "+ nextround);
-        }else{
+        if (correct) {
+            System.out.println("CORRECT!Number is " + nextround);
+        } else {
             System.out.println("GAME OVER!");
         }
-
 
 
     }
