@@ -202,6 +202,14 @@ public class GogoSmash {
         int currentnum = 0;
         int newnum = 0;
         int part1 = 0;
+
+        String cur="";
+        for(int i=0,size=currentresult.size();i<size;i++){
+            cur =cur+currentresult.get(i);
+        }
+
+        currentnum = Integer.valueOf(cur);
+
         ArrayList<ArrayList<Integer>> agr = new ArrayList<ArrayList<Integer>>();
         agr.add(int1);
         agr.add(int2);
@@ -267,6 +275,28 @@ public class GogoSmash {
 
         System.out.println(result);
         return result;
+    }
+
+    public int[] getPartNum(ArrayList<Integer> result,int parta,int partb){
+        System.out.println(result);
+        int[] partnum = new int[2];
+        int partaexist=0;
+        int partbexist=0;
+        int num;
+        for(int i=0,size=result.size();i<size-1;i++){
+            num = result.get(i);
+            if(num>0){
+                if(num<5){
+                    partaexist++;
+                }else{
+                    partbexist++;
+                }
+            }
+        }
+        partnum[0]=parta-partaexist;
+        partnum[1]=parta-partbexist;
+        System.out.println(partnum[0]+" "+partnum[1]);
+        return partnum;
     }
 
 
