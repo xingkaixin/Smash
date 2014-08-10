@@ -18,6 +18,8 @@ public class GogoSmash {
     ArrayList<Integer> ints7 = new ArrayList<Integer>();
     ArrayList<Integer> ints8 = new ArrayList<Integer>();
 
+    ArrayList<Integer> result =  new ArrayList<Integer>();
+
 
     //初始化一个4位随机数（1-8）
     public GogoSmash() {
@@ -49,7 +51,9 @@ public class GogoSmash {
         ints7.addAll(ints5);
         ints8.addAll(ints5);
 
-
+        for(int i=0;i<4;i++){
+            result.add(0);
+        }
     }
 
     //把8个数字集统计，方便后面计算
@@ -193,7 +197,8 @@ public class GogoSmash {
         return ints;
     }
 
-    public int GenNextGuessNumsPart1(ArrayList<Integer> int1, ArrayList<Integer> int2, ArrayList<Integer> int3, ArrayList<Integer> int4, int countnum) {
+    public int GenNextGuessNumsPart1(ArrayList<Integer> int1, ArrayList<Integer> int2, ArrayList<Integer> int3,
+                                     ArrayList<Integer> int4,ArrayList<Integer> currentresult, int countnum) {
         int currentnum = 0;
         int newnum = 0;
         int part1 = 0;
@@ -239,6 +244,31 @@ public class GogoSmash {
         }
         return newnum;
     }
+
+    public ArrayList<Integer> getResult(int lastnums, ArrayList<Integer> lastresult){
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        String str = String.valueOf(lastnums);
+        int a = Integer.valueOf(str.substring(0, 1));
+        int b = Integer.valueOf(str.substring(1, 2));
+        int c = Integer.valueOf(str.substring(2, 3));
+        int d = Integer.valueOf(str.substring(3, 4));
+        int[] nums = new int[4];
+        nums[0]=a;
+        nums[1]=b;
+        nums[2]=c;
+        nums[3]=d;
+        for(int i=0,size=lastresult.size();i<size-1;i++){
+            if(lastresult.get(i)==1){
+                result.add(nums[i]);
+            }else{
+                result.add(0);
+            }
+        }
+
+        System.out.println(result);
+        return result;
+    }
+
 
 
 }
