@@ -79,8 +79,8 @@ public class GogoSmash {
         int exist = 0;
         int currect = 0;
         String str = String.valueOf(num);
-        for(int i=0,size=str.length();i<4-size;i++){
-            str = "0"+str;
+        for (int i = 0, size = str.length(); i < 4 - size; i++) {
+            str = "0" + str;
         }
 
 
@@ -128,8 +128,8 @@ public class GogoSmash {
         String str = String.valueOf(lastnums);
         for (int i = 0, j = 1000, size = lastresult.size(); i < size - 1; i++) {
             if (lastresult.get(i) == 1) {
-               // System.out.println("i  " + i);
-                num +=  Integer.parseInt(str.substring(i, i + 1)) * j;
+                // System.out.println("i  " + i);
+                num += Integer.parseInt(str.substring(i, i + 1)) * j;
             }
             j = j / 10;
         }
