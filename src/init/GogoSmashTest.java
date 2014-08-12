@@ -28,6 +28,7 @@ public class GogoSmashTest {
         System.out.println("本次竞猜的正确数字是 "+gogo.smash+" 现在开始竞猜！");
         ArrayList<Integer> a  =gogo.GetResult(step1);
         trytime++;
+        //agrints = gogo.DelAgrIntsbyloc(agrints,gogo.getResultNum(step1,a));
 
         if(a.get(0)+a.get(1)+a.get(2)+a.get(3) <4){
             ArrayList<Integer> b  =gogo.GetResult(step2);
@@ -37,8 +38,10 @@ public class GogoSmashTest {
             }else{
                 ArrayList<Integer> nextguess = gogo.GetFirstandSecondStepResult(agrints,a,b);
                 agrints = gogo.DelAgrInts(agrints,nextguess);
-                agrints = gogo.DelAgrIntsbyloc(agrints,gogo.getResultNum(step1,a));
-                agrints = gogo.DelAgrIntsbyloc(agrints,gogo.getResultNum(step2, b));
+                agrints = gogo.DelAgrIntsbyloc(agrints,String.valueOf(step1));
+                agrints = gogo.DelAgrIntsbyloc(agrints,String.valueOf(step2));
+                System.out.println("DEBUG ag:" + nextguess);
+                System.out.println("DEBUG ag:" + agrints);
                 int part1 = a.get(4);
                 int part2 = b.get(4);
                 boolean notcorrect = true;
@@ -54,19 +57,21 @@ public class GogoSmashTest {
                     int8 = agrints.get(7);
                     nextguess = gogo.GenNextGuessNumsPart(int1,int2,int3,int4,nextguess,part1);
                     nextguess = gogo.GenNextGuessNumsPart(int5,int6,int7,int8,nextguess,part2);
+                    System.out.println("This Turn's num is :  "+nextguess);
                     nexnums = gogo.tranArraytoint(nextguess);
-                    System.out.println("DEBUG:  "+nexnums);
+
                     ArrayList<Integer> lastresult = gogo.GetResult(nexnums);
                     trytime++;
-                    if(lastresult.get(0)+lastresult.get(1)+lastresult.get(2)+lastresult.get(3)==4){
+                    if(lastresult.get(0)+lastresult.get(1)+lastresult.get(2)+lastresult.get(3)==2){
                         break;
                     }else{
                         agrints = gogo.DelAgrInts(agrints,nextguess);
-                        agrints = gogo.DelAgrIntsbyloc(agrints,gogo.getResultNum(nexnums,lastresult));
+                        agrints = gogo.DelAgrIntsbyloc(agrints,String.valueOf(nexnums));
                         int[] part = gogo.getPartNum(lastresult,part1,part2);
                         //part1 = part[0];
                         //part2 = part[1];
                         nextguess = gogo.getPreNextGuessResult(nexnums,lastresult);
+                        System.out.println(agrints);
                     }
                 }
                 System.out.println("竞猜成功！！！！正确数字是 "+ nexnums+" 这是竞猜的第 "+trytime+" 回合");
