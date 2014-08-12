@@ -132,7 +132,7 @@ public class GogoSmash {
         for (int i = 0, j = 0, size = 4 - Integer.valueOf(String.valueOf(num).length()); i < size; i++) {
             strnum = String.valueOf(j) + strnum;
         }
-        System.out.println(strnum);
+        //System.out.println(strnum);
         return strnum;
     }
 
@@ -143,7 +143,7 @@ public class GogoSmash {
         while (iter.hasNext()) {
             allints.add(DelInts(iter.next(), correctnums));
         }
-        System.out.println(allints);
+        //System.out.println(allints);
         return allints;
     }
 
@@ -187,7 +187,7 @@ public class GogoSmash {
             }
             i++;
         }
-        System.out.println(allints);
+        //System.out.println(allints);
         return allints;
     }
 
@@ -211,7 +211,7 @@ public class GogoSmash {
             cur = cur + currentresult.get(i);
         }
         cur = cur.replace("0", "");
-        System.out.println(cur.length());
+        //System.out.println(cur.length());
         if (cur.length() > 0) {
             currentnum = Integer.parseInt((cur));
         } else {
@@ -254,9 +254,9 @@ public class GogoSmash {
     public ArrayList<Integer> GetFirstandSecondStepResult(ArrayList<ArrayList<Integer>> agr, ArrayList<Integer> r1, ArrayList<Integer> r2) {
         final int g1 = 1234;
         final int g2 = 5678;
-        ArrayList<Integer> result1 = new ArrayList<Integer>();
-        ArrayList<Integer> result2 = new ArrayList<Integer>();
-        ArrayList<Integer> result = new ArrayList<Integer>();
+        ArrayList<Integer> result1;
+        ArrayList<Integer> result2;
+        ArrayList<Integer> result;
         result1 = getPreNextGuessResult(g1, r1);
         result2 = getPreNextGuessResult(g2, r2);
 
@@ -269,7 +269,6 @@ public class GogoSmash {
         }
 
 
-        System.out.println("NOw!!!!!" + result);
         return result;
 
     }
@@ -318,7 +317,7 @@ public class GogoSmash {
             }
         }
 
-        System.out.println(result);
+        //System.out.println(result);
         return result;
     }
 
@@ -339,9 +338,18 @@ public class GogoSmash {
             }
         }
         partnum[0] = parta - partaexist;
-        partnum[1] = parta - partbexist;
-        System.out.println(partnum[0] + " " + partnum[1]);
+        partnum[1] = partb - partbexist;
+        //System.out.println(partnum[0] + " " + partnum[1]);
         return partnum;
+    }
+
+    public int tranArraytoint(ArrayList<Integer> nums) {
+        int num = 0;
+        for (int i = 0, j = 1000, size = nums.size(); i < size; i++) {
+            num += nums.get(i) * j;
+            j = j / 10;
+        }
+        return num;
     }
 
 
