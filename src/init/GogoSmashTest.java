@@ -81,7 +81,7 @@ public class GogoSmashTest {
 
     @Test
     public void TestALL() {
-        int turn = 2000000;
+        int turn = 20000000;
         int alltrytimes = 0;
         int succ = 0;
         int fail = 0;
