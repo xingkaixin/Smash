@@ -37,11 +37,9 @@ public class GogoSmashTest {
                 System.out.println("竞猜成功！！！！"+"正确数字是："+step2+" 这是竞猜的第 "+trytime+" 回合");
             }else{
                 ArrayList<Integer> nextguess = gogo.GetFirstandSecondStepResult(agrints,a,b);
-                agrints = gogo.DelAgrInts(agrints,nextguess);
+                //agrints = gogo.DelAgrInts(agrints,nextguess);
                 agrints = gogo.DelAgrIntsbyloc(agrints,String.valueOf(step1));
                 agrints = gogo.DelAgrIntsbyloc(agrints,String.valueOf(step2));
-                System.out.println("DEBUG ag:" + nextguess);
-                System.out.println("DEBUG ag:" + agrints);
                 int part1 = a.get(4);
                 int part2 = b.get(4);
                 boolean notcorrect = true;
@@ -57,21 +55,17 @@ public class GogoSmashTest {
                     int8 = agrints.get(7);
                     nextguess = gogo.GenNextGuessNumsPart(int1,int2,int3,int4,nextguess,part1);
                     nextguess = gogo.GenNextGuessNumsPart(int5,int6,int7,int8,nextguess,part2);
-                    System.out.println("This Turn's num is :  "+nextguess);
                     nexnums = gogo.tranArraytoint(nextguess);
 
                     ArrayList<Integer> lastresult = gogo.GetResult(nexnums);
                     trytime++;
-                    if(lastresult.get(0)+lastresult.get(1)+lastresult.get(2)+lastresult.get(3)==2){
+                    if(lastresult.get(0)+lastresult.get(1)+lastresult.get(2)+lastresult.get(3)>3){
                         break;
                     }else{
-                        agrints = gogo.DelAgrInts(agrints,nextguess);
+                        //agrints = gogo.DelAgrInts(agrints,nextguess);
                         agrints = gogo.DelAgrIntsbyloc(agrints,String.valueOf(nexnums));
                         int[] part = gogo.getPartNum(lastresult,part1,part2);
-                        //part1 = part[0];
-                        //part2 = part[1];
                         nextguess = gogo.getPreNextGuessResult(nexnums,lastresult);
-                        System.out.println(agrints);
                     }
                 }
                 System.out.println("竞猜成功！！！！正确数字是 "+ nexnums+" 这是竞猜的第 "+trytime+" 回合");

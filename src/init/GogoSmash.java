@@ -252,7 +252,7 @@ public class GogoSmash {
             }
         }
 
-        System.out.println("new guess num:" + currentresult);
+        //System.out.println("new guess num:" + currentresult);
         return currentresult;
     }
 
@@ -327,7 +327,7 @@ public class GogoSmash {
     }
 
     public int[] getPartNum(ArrayList<Integer> result, int parta, int partb) {
-        System.out.println(result);
+        //System.out.println(result);
         int[] partnum = new int[2];
         int partaexist = 0;
         int partbexist = 0;
