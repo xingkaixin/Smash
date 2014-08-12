@@ -253,6 +253,30 @@ public class GogoSmash {
         return currentresult;
     }
 
+    public ArrayList<Integer> GetFirstandSecondStepResult(ArrayList<ArrayList<Integer>> agr,ArrayList<Integer> r1,ArrayList<Integer> r2){
+        final int g1 = 1234;
+        final int g2 = 5678;
+        ArrayList<Integer> result1 = new ArrayList<Integer>();
+        ArrayList<Integer> result2 = new ArrayList<Integer>();
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        result1 = getPreNextGuessResult(g1,r1);
+        result2 = getPreNextGuessResult(g2,r2);
+
+        result = result1;
+        for(int i=0,size = result2.size();i<size-1;i++){
+            int num = result2.get(i);
+            if(num>0){
+                result.set(i,num);
+            }
+        }
+
+
+        System.out.println("NOw!!!!!"+result);
+        return  result;
+
+    }
+
+
     public int GetNumFromInts(ArrayList<Integer> ints, int currentnum) {
         Iterator<Integer> iter = ints.iterator();
         String str = String.valueOf(currentnum);
