@@ -77,7 +77,7 @@ public class GogoSmash {
         ArrayList<Integer> result = new ArrayList<Integer>();
         ArrayList<Integer> strnums = new ArrayList<Integer>();
         int exist = 0;
-        int currect =0;
+        int currect = 0;
         String str = String.valueOf(num);
         for (int i = 0, length = str.length(); i < length; i++) {
             strnums.add(Integer.valueOf(str.substring(i, i + 1)));
@@ -95,7 +95,7 @@ public class GogoSmash {
                 result.add(0);
             }
         }
-        result.add(exist-currect);
+        result.add(exist - currect);
         System.out.println(result);
         return result;
     }
@@ -201,7 +201,7 @@ public class GogoSmash {
     }
 
     public ArrayList<Integer> GenNextGuessNumsPart(ArrayList<Integer> int1, ArrayList<Integer> int2, ArrayList<Integer> int3,
-                                    ArrayList<Integer> int4, ArrayList<Integer> currentresult, int countnum) {
+                                                   ArrayList<Integer> int4, ArrayList<Integer> currentresult, int countnum) {
         int currentnum = 0;
         int newnum = 0;
         int part1 = 0;
@@ -212,13 +212,11 @@ public class GogoSmash {
         }
         cur = cur.replace("0", "");
         System.out.println(cur.length());
-        if(cur.length()>0){
+        if (cur.length() > 0) {
             currentnum = Integer.parseInt((cur));
-        }
-        else {
+        } else {
             currentnum = 0;
         }
-
 
 
         ArrayList<ArrayList<Integer>> agr = new ArrayList<ArrayList<Integer>>();
@@ -230,7 +228,7 @@ public class GogoSmash {
 
         ArrayList<Integer> operinst = new ArrayList<Integer>();
         for (int i = 0, j = 0, size = agr.size(); i < size; i++) {
-            if(j==countnum){
+            if (j == countnum) {
                 break;
             }
 
@@ -249,30 +247,30 @@ public class GogoSmash {
             }
         }
 
-        System.out.println("new guess num:"+currentresult);
+        System.out.println("new guess num:" + currentresult);
         return currentresult;
     }
 
-    public ArrayList<Integer> GetFirstandSecondStepResult(ArrayList<ArrayList<Integer>> agr,ArrayList<Integer> r1,ArrayList<Integer> r2){
+    public ArrayList<Integer> GetFirstandSecondStepResult(ArrayList<ArrayList<Integer>> agr, ArrayList<Integer> r1, ArrayList<Integer> r2) {
         final int g1 = 1234;
         final int g2 = 5678;
         ArrayList<Integer> result1 = new ArrayList<Integer>();
         ArrayList<Integer> result2 = new ArrayList<Integer>();
         ArrayList<Integer> result = new ArrayList<Integer>();
-        result1 = getPreNextGuessResult(g1,r1);
-        result2 = getPreNextGuessResult(g2,r2);
+        result1 = getPreNextGuessResult(g1, r1);
+        result2 = getPreNextGuessResult(g2, r2);
 
         result = result1;
-        for(int i=0,size = result2.size();i<size-1;i++){
+        for (int i = 0, size = result2.size(); i < size - 1; i++) {
             int num = result2.get(i);
-            if(num>0){
-                result.set(i,num);
+            if (num > 0) {
+                result.set(i, num);
             }
         }
 
 
-        System.out.println("NOw!!!!!"+result);
-        return  result;
+        System.out.println("NOw!!!!!" + result);
+        return result;
 
     }
 
