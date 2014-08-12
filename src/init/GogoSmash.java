@@ -1,5 +1,6 @@
 package init;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -18,7 +19,7 @@ public class GogoSmash {
     ArrayList<Integer> ints7 = new ArrayList<Integer>();
     ArrayList<Integer> ints8 = new ArrayList<Integer>();
 
-    ArrayList<Integer> result =  new ArrayList<Integer>();
+    ArrayList<Integer> result = new ArrayList<Integer>();
 
 
     //初始化一个4位随机数（1-8）
@@ -51,7 +52,7 @@ public class GogoSmash {
         ints7.addAll(ints5);
         ints8.addAll(ints5);
 
-        for(int i=0;i<4;i++){
+        for (int i = 0; i < 4; i++) {
             result.add(0);
         }
     }
@@ -76,6 +77,7 @@ public class GogoSmash {
         ArrayList<Integer> result = new ArrayList<Integer>();
         ArrayList<Integer> strnums = new ArrayList<Integer>();
         int exist = 0;
+        int currect =0;
         String str = String.valueOf(num);
         for (int i = 0, length = str.length(); i < length; i++) {
             strnums.add(Integer.valueOf(str.substring(i, i + 1)));
@@ -85,6 +87,7 @@ public class GogoSmash {
                 exist++;
                 if (smash.indexOf(strnums.get(i)) == i) {
                     result.add(1);
+                    currect++;
                 } else {
                     result.add(0);
                 }
@@ -92,7 +95,7 @@ public class GogoSmash {
                 result.add(0);
             }
         }
-        result.add(exist);
+        result.add(exist-currect);
         System.out.println(result);
         return result;
     }
@@ -197,45 +200,65 @@ public class GogoSmash {
         return ints;
     }
 
-    public int GenNextGuessNumsPart1(ArrayList<Integer> int1, ArrayList<Integer> int2, ArrayList<Integer> int3,
-                                     ArrayList<Integer> int4,ArrayList<Integer> currentresult, int countnum) {
+    public ArrayList<Integer> GenNextGuessNumsPart(ArrayList<Integer> int1, ArrayList<Integer> int2, ArrayList<Integer> int3,
+                                    ArrayList<Integer> int4, ArrayList<Integer> currentresult, int countnum) {
         int currentnum = 0;
         int newnum = 0;
         int part1 = 0;
 
-        String cur="";
-        for(int i=0,size=currentresult.size();i<size;i++){
-            cur =cur+currentresult.get(i);
+        String cur = "";
+        for (int i = 0, size = currentresult.size(); i < size; i++) {
+            cur = cur + currentresult.get(i);
+        }
+        cur = cur.replace("0", "");
+        System.out.println(cur.length());
+        if(cur.length()>0){
+            currentnum = Integer.parseInt((cur));
+        }
+        else {
+            currentnum = 0;
         }
 
-        currentnum = Integer.valueOf(cur);
+
 
         ArrayList<ArrayList<Integer>> agr = new ArrayList<ArrayList<Integer>>();
         agr.add(int1);
         agr.add(int2);
         agr.add(int3);
         agr.add(int4);
+
+
         ArrayList<Integer> operinst = new ArrayList<Integer>();
-        for (int i = 0, j = 1000; i < countnum ; i++) {
-            operinst.addAll(agr.get(i));
-            System.out.println(operinst);
-            if (!operinst.isEmpty()) {
-                newnum += GetNumFromInts(operinst, currentnum) * j;
-                operinst.clear();
-                j = j / 10;
-                currentnum = newnum;
+        for (int i = 0, j = 0, size = agr.size(); i < size; i++) {
+            if(j==countnum){
+                break;
+            }
+
+            if (agr.get(i).size() > 0) {
+                int locnum = currentresult.get(i);
+                if (locnum == 0) {
+                    int curloc = GetNumFromInts(agr.get(i), currentnum);
+                    currentnum = Integer.valueOf(currentnum + "" + curloc);
+                    currentresult.set(i, curloc);
+                    j++;
+                }
+            }
+
+            if (j == countnum) {
+                break;
             }
         }
-        System.out.println("acttttt "+newnum);
-        return newnum;
+
+        System.out.println("new guess num:"+currentresult);
+        return currentresult;
     }
 
     public int GetNumFromInts(ArrayList<Integer> ints, int currentnum) {
         Iterator<Integer> iter = ints.iterator();
         String str = String.valueOf(currentnum);
 
-        for(int i =0,j=0,size = str.length();i<4-size;i++){
-            str = j+str;
+        for (int i = 0, j = 0, size = str.length(); i < 4 - size; i++) {
+            str = j + str;
         }
 
         int a = Integer.valueOf(str.substring(0, 1));
@@ -253,7 +276,7 @@ public class GogoSmash {
         return newnum;
     }
 
-    public ArrayList<Integer> getResult(int lastnums, ArrayList<Integer> lastresult){
+    public ArrayList<Integer> getPreNextGuessResult(int lastnums, ArrayList<Integer> lastresult) {
         ArrayList<Integer> result = new ArrayList<Integer>();
         String str = String.valueOf(lastnums);
         int a = Integer.valueOf(str.substring(0, 1));
@@ -261,14 +284,14 @@ public class GogoSmash {
         int c = Integer.valueOf(str.substring(2, 3));
         int d = Integer.valueOf(str.substring(3, 4));
         int[] nums = new int[4];
-        nums[0]=a;
-        nums[1]=b;
-        nums[2]=c;
-        nums[3]=d;
-        for(int i=0,size=lastresult.size();i<size-1;i++){
-            if(lastresult.get(i)==1){
+        nums[0] = a;
+        nums[1] = b;
+        nums[2] = c;
+        nums[3] = d;
+        for (int i = 0, size = lastresult.size(); i < size - 1; i++) {
+            if (lastresult.get(i) == 1) {
                 result.add(nums[i]);
-            }else{
+            } else {
                 result.add(0);
             }
         }
@@ -277,28 +300,27 @@ public class GogoSmash {
         return result;
     }
 
-    public int[] getPartNum(ArrayList<Integer> result,int parta,int partb){
+    public int[] getPartNum(ArrayList<Integer> result, int parta, int partb) {
         System.out.println(result);
         int[] partnum = new int[2];
-        int partaexist=0;
-        int partbexist=0;
+        int partaexist = 0;
+        int partbexist = 0;
         int num;
-        for(int i=0,size=result.size();i<size-1;i++){
+        for (int i = 0, size = result.size(); i < size - 1; i++) {
             num = result.get(i);
-            if(num>0){
-                if(num<5){
+            if (num > 0) {
+                if (num < 5) {
                     partaexist++;
-                }else{
+                } else {
                     partbexist++;
                 }
             }
         }
-        partnum[0]=parta-partaexist;
-        partnum[1]=parta-partbexist;
-        System.out.println(partnum[0]+" "+partnum[1]);
+        partnum[0] = parta - partaexist;
+        partnum[1] = parta - partbexist;
+        System.out.println(partnum[0] + " " + partnum[1]);
         return partnum;
     }
-
 
 
 }
