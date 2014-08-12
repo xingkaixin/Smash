@@ -295,6 +295,7 @@ public class GogoSmash {
         }
         partnum[0]=parta-partaexist;
         partnum[1]=parta-partbexist;
+        System.out.println(partnum[0]+" "+partnum[1]);
         return partnum;
     }
 
