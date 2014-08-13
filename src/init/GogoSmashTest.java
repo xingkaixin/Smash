@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import static org.junit.Assert.*;
 
@@ -81,7 +82,9 @@ public class GogoSmashTest {
 
     @Test
     public void TestALL() {
-        int turn = 20000000;
+        HashSet<ArrayList<Integer>>  failednums = new HashSet<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> failednums2 = new ArrayList<ArrayList<Integer>>();
+        int turn = 2000000;
         int alltrytimes = 0;
         int succ = 0;
         int fail = 0;
@@ -139,9 +142,11 @@ public class GogoSmashTest {
 
                         ArrayList<Integer> lastresult = gogo.GetResult(nexnums);
                         trytime++;
-                        if (trytime > 9) {
+                        if (trytime > 10) {
                             trytime++;
                             //System.out.println("竞猜失败");
+                            failednums.add(gogo.smash);
+                            failednums2.add(gogo.smash);
                             fail++;
                             break;
                         }
@@ -176,5 +181,8 @@ public class GogoSmashTest {
         System.out.println("10次内命中率 " + f.format(succrate));
         float avgturn = (float) succ_trytimes / (float) succ;
         System.out.println("10次内命中平均回合数  " + f.format(avgturn));
+        System.out.println(failednums.size());
+        System.out.println(failednums2.size());
+        System.out.println(failednums);
     }
 }
