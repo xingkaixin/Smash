@@ -42,6 +42,9 @@ public class GogoSmashTest {
                 //agrints = gogo.DelAgrInts(agrints,nextguess);
                 agrints = gogo.DelAgrIntsbyloc(agrints, String.valueOf(step1));
                 agrints = gogo.DelAgrIntsbyloc(agrints, String.valueOf(step2));
+                int actpart1 = a.get(0)+a.get(1)+a.get(2)+a.get(3)+a.get(4);
+                int actpart2 = b.get(0)+b.get(1)+b.get(2)+b.get(3)+b.get(4);
+                //System.out.println(actpart1+" "+actpart2);
                 int part1 = a.get(4);
                 int part2 = b.get(4);
                 boolean notcorrect = true;
@@ -66,7 +69,9 @@ public class GogoSmashTest {
                     } else {
                         //agrints = gogo.DelAgrInts(agrints,nextguess);
                         agrints = gogo.DelAgrIntsbyloc(agrints, String.valueOf(nexnums));
-                        int[] part = gogo.getPartNum(lastresult, part1, part2);
+                        int[] part = gogo.getPartNum(lastresult, actpart1, actpart2);
+                        part1 = part[0];
+                        part2 = part[1];
                         nextguess = gogo.getPreNextGuessResult(nexnums, lastresult);
                     }
                 }
@@ -84,7 +89,7 @@ public class GogoSmashTest {
     public void TestALL() {
         HashSet<ArrayList<Integer>>  failednums = new HashSet<ArrayList<Integer>>();
         ArrayList<ArrayList<Integer>> failednums2 = new ArrayList<ArrayList<Integer>>();
-        int turn = 2000000;
+        int turn = 20000000;
         int alltrytimes = 0;
         int succ = 0;
         int fail = 0;
@@ -121,8 +126,12 @@ public class GogoSmashTest {
                 } else {
                     ArrayList<Integer> nextguess = gogo.GetFirstandSecondStepResult(agrints, a, b);
                     //agrints = gogo.DelAgrInts(agrints,nextguess);
+                    //System.out.println(agrints);
                     agrints = gogo.DelAgrIntsbyloc(agrints, String.valueOf(step1));
                     agrints = gogo.DelAgrIntsbyloc(agrints, String.valueOf(step2));
+                    //System.out.println(agrints);
+                    int actpart1 = a.get(0)+a.get(1)+a.get(2)+a.get(3)+a.get(4);
+                    int actpart2 = b.get(0)+b.get(1)+b.get(2)+b.get(3)+b.get(4);
                     int part1 = a.get(4);
                     int part2 = b.get(4);
                     boolean notcorrect = true;
@@ -158,8 +167,14 @@ public class GogoSmashTest {
                             break;
                         } else {
                             //agrints = gogo.DelAgrInts(agrints,nextguess);
+                            ArrayList<Integer> lastnums = gogo.getPreNextGuessResult(nexnums,lastresult);
+
                             agrints = gogo.DelAgrIntsbyloc(agrints, String.valueOf(nexnums));
-                            int[] part = gogo.getPartNum(lastresult, part1, part2);
+                            int[] part = gogo.getPartNum(lastnums, actpart1, actpart2);
+                            part1 = part[0];
+                            part2 = part[1];
+                            //System.out.println(curturn+" "+trytime+" "+gogo.smash+nexnums+" "+actpart1+" "+actpart2+" "+part[0]+part[1]);
+                            //System.out.println(agrints);
                             nextguess = gogo.getPreNextGuessResult(nexnums, lastresult);
                         }
                     }
@@ -181,8 +196,8 @@ public class GogoSmashTest {
         System.out.println("10次内命中率 " + f.format(succrate));
         float avgturn = (float) succ_trytimes / (float) succ;
         System.out.println("10次内命中平均回合数  " + f.format(avgturn));
-        System.out.println(failednums.size());
-        System.out.println(failednums2.size());
-        System.out.println(failednums);
+        //System.out.println(failednums.size());
+        //System.out.println(failednums2.size());
+        //System.out.println(failednums);
     }
 }

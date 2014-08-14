@@ -266,7 +266,7 @@ public class GogoSmash {
         result2 = getPreNextGuessResult(g2, r2);
 
         result = result1;
-        for (int i = 0, size = result2.size(); i < size - 1; i++) {
+        for (int i = 0, size = result2.size(); i < size ; i++) {
             int num = result2.get(i);
             if (num > 0) {
                 result.set(i, num);
